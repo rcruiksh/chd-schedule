@@ -1,0 +1,1323 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<title>Help Desk Internal</title>
+<link rel="stylesheet" type="text/css" href="media/css/style.css">
+<link rel="stylesheet" type="text/css" href="media/css/style-print.css" media="print">
+<script src="media/js/ajaxFunctions.js"></script>
+<script src="media/js/searchBar.js"></script>
+<script src="media/js/jquery.min.js"></script>
+
+
+</head>
+<body>
+<div id="header" class="topbar">
+	<div id="logo"><img src="media/images/uvic-logo-inside.gif"></div>
+	<div id="links"><a href="https://connect.uvic.ca/sites/systems/chd/wiki/SitePages/Home.aspx">Connect</a>|<a href="http://helpdesk.uvic.ca">Public Site</a>|<a>
+		Sunday, March 22nd	</a>
+	</div>
+	<div id="searchbox">
+					<table class="sBar">
+				<tbody><tr>
+					<td><div onclick="showHide()" id="magicButton"><img align="absmiddle" src="media/images/homer.png"></div></td><td><div><img src="media/images/dd.bmp" onclick="showHide()"></div></td>
+					<td><input type="text" id="search" name="SearchString" onkeypress="checkEnter(event)"></td>
+					<td><img src="media/images/search.bmp" onclick="submitSearch()"></td>
+				</tr>
+			</tbody></table>
+
+			<div id="selections">
+				<table cellpadding="0" cellspacing="0" style="width:100%;" class="selector">
+					<tbody><tr onclick="switchSearch(0)"><td><img align="absmiddle" src="media/images/homer.png"></td><td>Homer Search</td></tr><tr onclick="switchSearch(1)"><td><img align="absmiddle" src="media/images/rt.png"></td><td>RT Tracker</td></tr><tr onclick="switchSearch(2)"><td><img align="absmiddle" src="media/images/dir.png"></td><td>UVic Directory</td></tr><tr onclick="switchSearch(3)"><td><img align="absmiddle" src="media/images/google.png"></td><td>Google Search</td></tr>				</tbody></table>
+			</div>
+
+		<script type="text/javascript">
+		addImage(0,"<img align='absmiddle' src='media/images/homer.png' >");
+addImage(1,"<img align='absmiddle' src='media/images/rt.png' >");
+addImage(2,"<img align='absmiddle' src='media/images/dir.png' >");
+addImage(3,"<img align='absmiddle' src='media/images/google.png' >");
+		</script>
+	</div>
+
+	<div id="login"><table style="padding:0px;margin:0px;white-space:nowrap" cellspacing="0" cellpadding="0" width="99%"><tbody><tr>
+	<td width="100%" align="right"><img src="media/images/padlock.gif"><a href="index.php?next_page=login.php">Log in</a></td>	</tr></tbody></table></div>
+</div>
+<div id="wrap">
+<div id="sidebar">
+<div id="Web Homer" class="navbox"><h3 onclick="toggle('Web Homer')" class="categ">Web Homer</h3><div id="Web Homer_sub" style="width:170px;display:none" class="subkeys"><a href="index.php?next_page=webhomer/index.php">Index</a><br><div class="line"></div></div></div>
+<div id="Netlink" class="navbox"><h3 onclick="toggle('Netlink')" class="categ">Netlink</h3><div id="Netlink_sub" style="width:170px;display:none" class="subkeys"><a href="index.php?next_page=netlink/secondary.php">Apply for Secondary Netlink</a><br><a href="index.php?next_page=netlink/change.php">Change Netlink-ID</a><br><a href="index.php?next_page=netlink/disklimit.php">Increase Disk Size Limit</a><br></div></div>
+<div id="Email Tools" class="navbox"><h3 onclick="toggle('Email Tools')" class="categ">Email Tools</h3><div id="Email Tools_sub" style="width:170px;display:none" class="subkeys"><a href="index.php?next_page=ecsAdmin/names.php">Exchange Display Name</a><br><a href="index.php?next_page=ecsAdmin/delegate.php">Exchange Delegates</a><br><div class="line"></div></div></div>
+<div id="Informed" class="navbox"><h3 onclick="toggle('Informed')" class="categ">Informed</h3><div id="Informed_sub" style="width:170px;display:none" class="subkeys"><a href="index.php?next_page=informed/view.php">View Messages</a><br><a href="index.php?next_page=informed/view_do.php&amp;timing=0&amp;refresh=300">Legacy View</a><br><a href="/view_rss.php">Informed RSS Feed</a><br><div class="line"></div><a href="index.php?next_page=informed/archive.php&amp;page=1">Informed Archive</a><br><div class="line"></div><a href="index.php?next_page=informed/post.php">Post Informed Message</a><br><a href="index.php?next_page=informed/edit.php">Edit Informed Message</a><br><div class="line"></div><a href="index.php?next_page=informed/dashboard_post.php">Post Dashboard Message</a><br><a href="index.php?next_page=informed/dashboard_edit.php">Edit Dashboard Message</a><br><div class="line"></div><a href="index.php?next_page=informed/subscriptions.php">My Email Subscriptions</a><br></div></div>
+</div>
+<div id="main">
+<link rel="stylesheet" href="media/css/schedule.css" type="text/css">
+
+<script>
+<!--
+
+/*
+Auto Refresh Page with Time script
+By JavaScript Kit (javascriptkit.com)
+Over 200+ free scripts here!
+*/
+
+var limit="351"
+
+function beginrefresh(){
+    if (!document.images)
+        return
+    if (limit==1)
+        window.location.reload()
+    else{
+        limit--
+        curmin=Math.floor(limit/60)
+        cursec=limit%60
+        if (curmin!=0)
+            curtime="page will refresh automatically in "+curmin+" minutes and "+cursec+" seconds"
+        else
+            curtime="page will refresh automatically in "+cursec+" seconds"
+        window.status=curtime
+        setTimeout("beginrefresh()",1000)
+    }
+}
+
+window.onload=beginrefresh
+//-->
+</script>
+
+<table width="98%" border="0" cellpadding="0" cellspacing="0" class="schedule_control">
+    <tbody><tr>
+	<td style="background:url(media/images/schedule/bg_grad.png) repeat-x"><nobr>Daily View</nobr></td>
+	 <td style="background:url(media/images/schedule/bg_grad.png) repeat-x"><select id="schedule_group" onchange="showTable()">
+                                <optgroup label="Custom Groupings">
+                                <option value="1,4" selected=""> CHD Analysts and CHD Co-ops </option>
+                                </optgroup>
+                                <optgroup label="Individual Groups">
+                                 <option value="1">CHD Co-op</option><option value="4">CUPE 4163 Senior Assistants</option>                                </optgroup>
+                                <optgroup label="All Units">
+                                <option value="1,4" selected="">All Units</option>
+                                </optgroup>
+                                </select>
+				                                </td>
+        <td style="border-left:solid 2px #6593CF;border-right:solid 2px #6593CF;width:100%;vertical-align:middle;background:url(media/images/schedule/bg_grad.png) repeat-x" valign="top" nowrap=""><center>
+	<a id="back_arrow" class="schedule_fwdBack" href="https://helpdesk.uvic.ca/tools/index.php?next_page=schedule/viewAll.php&amp;dateTS=1585209600&amp;schedule_group=1,4">
+		<img style="border:none;vertical-align:middle" src="media/images/schedule/left_arrow.png"></a>&nbsp;
+
+		<font size="3"><b>Friday Mar. 27, 2020</b></font>
+
+            <a id="forward_arrow" class="schedule_fwdBack" href="https://helpdesk.uvic.ca/tools/index.php?next_page=schedule/viewAll.php&amp;dateTS=1585382400&amp;schedule_group=1,4">
+		<img style="border:none;vertical-align:middle;" src="media/images/schedule/right_arrow.png"></a>
+        </center></td>
+	<td style="background:url(media/images/schedule/bg_grad.png) repeat-x"><nobr>
+		<form name="pickDay">
+                <input type="hidden" name="next_page" value="schedule/viewAll.php">
+		<input id="hidden_group" type="hidden" name="schedule_group" value="1,4">
+		<input name="date" value="03/27/2020" size="11" onclick="this.blur();gfPop.fPopCalendar(document.pickDay.date);return false;">
+		<input type="submit" name="changeDay" value="Go">
+            </form>
+	</nobr></td>
+    </tr>
+</tbody></table>
+
+<br>
+<div id="tableSpace"><table cellspacing="3" cellpadding="0" class="dailySchedule" border="1">
+	<tbody><tr>
+		<td></td>
+		<th align="center">&nbsp;Alexandra&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Amanda&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Andrew&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Blake&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Cassidy&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;Catherine&nbsp;</th>
+		<th align="center">&nbsp;Chandula&nbsp;&nbsp;</th>
+		<th align="center">Christopher</th>
+		<th align="center">&nbsp;&nbsp;Claire&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Denzel&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Erin&nbsp;&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Ethan&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Gavin&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Georgia&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Gillian&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Hanna&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Jamie&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Kathy&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Katy&nbsp;&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Keanu&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Kendra&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Kutay&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Maggie&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Marcela&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Richard&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Sarah&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Scott&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Shaelyn&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Shannon&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;Sophie&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Taryn&nbsp;&nbsp;&nbsp;</th>
+		<th align="center">&nbsp;&nbsp;&nbsp;Will&nbsp;&nbsp;&nbsp;&nbsp;</th>
+		<td></td></tr>
+	<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">8:00</td>
+		<td title="8:00 - 9:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="8:00 - 8:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="8:00 - 8:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="8:00 - 9:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="8:00 - 9:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="8:00 - 10:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tc"></td>
+		<td title="8:00 - 9:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="8:00 - 8:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tt"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 8:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 9:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 9:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_tc"><b>BEC</b></td>
+		<td title="8:00 - 10:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="8:00 - 9:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="8:00 - 8:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="8:00 - 12:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 10:00 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td class="workCount">3</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">8:30</td>
+		<td title="8:00 - 9:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="8:30 - 10:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_tc"><b>HSD</b></td>
+		<td title="8:30 - 9:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="8:00 - 9:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt">9:00</td>
+		<td title="8:00 - 9:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="8:00 - 10:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_mc"></td>
+		<td title="8:00 - 9:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="8:30 - 9:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;8:30 - </nobr></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:30 - 9:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="8:30 - 9:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;8:30 - </nobr></td>
+		<td title="8:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 9:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt">9:00</td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 9:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="8:00 - 10:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:00 - 9:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="8:30 - 9:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;8:30 - </nobr></td>
+		<td title="8:00 - 12:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="8:00 - 10:00 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td class="workCount">4</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">9:00</td>
+		<td title="8:00 - 9:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_bt">9:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="8:30 - 10:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc"><nobr>&nbsp;8:30 - </nobr></td>
+		<td title="9:00 - 10:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="9:00 - 10:30 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_tc"><b>LIB</b></td>
+		<td title="8:00 - 9:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt">9:30</td>
+		<td title="8:00 - 10:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="8:00 - 9:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt">9:30</td>
+		<td title="8:30 - 9:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">9:30</td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="9:00 - 10:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:30 - 9:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">9:30</td>
+		<td title="8:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="9:00 - 11:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_tc"><b>TSC</b></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 9:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_bt">9:30</td>
+		<td title="8:00 - 10:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="8:00 - 9:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt">9:30</td>
+		<td title="8:30 - 9:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">9:30</td>
+		<td title="8:00 - 12:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:00 - 10:00 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">10:00</td>
+		<td class="workCount">6</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">9:30</td>
+		<td title="9:30 - 10:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;9:30 - </nobr></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="8:30 - 10:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc">10:30</td>
+		<td title="9:00 - 10:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;9:00 - </nobr></td>
+		<td title="9:00 - 10:30 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_mc"><nobr>&nbsp;9:00 - </nobr></td>
+		<td title="9:30 - 11:00 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="8:00 - 10:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_mc">10:30</td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="9:00 - 10:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;9:00 - </nobr></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;8:30 - </nobr></td>
+		<td title="9:30 - 11:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_tc"><b>BEC</b></td>
+		<td title="8:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="9:00 - 11:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_mc"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="9:30 - 11:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="8:00 - 10:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">10:30</td>
+		<td title="9:30 - 10:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;9:30 - </nobr></td>
+		<td title="9:30 - 10:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tc"><nobr>&nbsp;9:30 - </nobr></td>
+		<td title="8:00 - 12:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;8:30 - </nobr></td>
+		<td title="8:00 - 10:00 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td class="workCount">7</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">10:00</td>
+		<td title="9:30 - 10:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">10:30</td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;9:30 - </nobr></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="8:30 - 10:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_bt"></td>
+		<td title="9:00 - 10:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt">10:30</td>
+		<td title="9:00 - 10:30 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_bt">10:30</td>
+		<td title="9:30 - 11:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;9:30 - </nobr></td>
+		<td title="8:00 - 10:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_bt"></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;9:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;9:30 - </nobr></td>
+		<td title="9:00 - 10:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt">10:30</td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">11:30</td>
+		<td title="9:30 - 11:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"><nobr>&nbsp;9:30 - </nobr></td>
+		<td title="8:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;8:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="9:00 - 11:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_mc"><nobr>&nbsp;9:00 - </nobr></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;9:30 - </nobr></td>
+		<td title="9:30 - 11:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;9:30 - </nobr></td>
+		<td title="8:00 - 10:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="9:30 - 10:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">10:30</td>
+		<td title="9:30 - 10:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_bt">10:30</td>
+		<td title="8:00 - 12:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="10:00 - 10:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">11:30</td>
+		<td title="10:00 - 11:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tc"><nobr>&nbsp;10:00 - </nobr></td>
+		<td class="workCount">7</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">10:30</td>
+		<td title="10:30 - 11:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tc"><nobr>&nbsp;10:30 - </nobr></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">11:30</td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="10:30 - 11:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="10:30 - 11:30 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_tc"><nobr>&nbsp;10:30 - </nobr></td>
+		<td title="10:30 - 11:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tt"><b>CHD</b></td>
+		<td title="9:30 - 11:00 (Class)" style="margin:0 2px 0 2px;" class="class_bt">11:00</td>
+		<td title="10:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;10:30 - </nobr></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">11:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">11:30</td>
+		<td title="10:30 - 13:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_tc"><b>HSD</b></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="9:30 - 11:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_bt">11:00</td>
+		<td title="8:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">12:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="10:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;10:30 - </nobr></td>
+		<td title="9:00 - 11:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_mc">11:30</td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="10:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;10:30 - </nobr></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">11:30</td>
+		<td title="9:30 - 11:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc">11:30</td>
+		<td title="10:30 - 11:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tc"><nobr>&nbsp;10:30 - </nobr></td>
+		<td title="10:30 - 11:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tc"><nobr>&nbsp;10:30 - </nobr></td>
+		<td title="10:30 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="8:00 - 12:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">12:30</td>
+		<td title="10:30 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="10:00 - 11:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_bt">11:00</td>
+		<td class="workCount">8</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">11:00</td>
+		<td title="10:30 - 11:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_bt">11:30</td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="11:00 - 14:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_tc"><b>BEC</b></td>
+		<td title="10:30 - 11:30 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_bt">11:30</td>
+		<td title="11:00 - 11:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="11:00 - 11:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tt"></td>
+		<td title="10:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">11:30</td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="10:30 - 13:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc"></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="11:00 - 11:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="8:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="10:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">11:30</td>
+		<td title="9:00 - 11:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_bt"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="10:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">11:30</td>
+		<td title="9:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="9:30 - 11:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt"></td>
+		<td title="10:30 - 11:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_bt">11:30</td>
+		<td title="10:30 - 11:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_bt">11:30</td>
+		<td title="10:30 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"></td>
+		<td title="8:00 - 12:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="10:30 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:30 - 11:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="11:00 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td class="workCount">8</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">11:30</td>
+		<td title="11:30 - 12:30 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_tc"><nobr>&nbsp;11:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="11:00 - 14:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"></td>
+		<td title="11:30 - 12:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tt"><b>CHD</b></td>
+		<td title="11:30 - 13:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_tc"><b>CLE</b></td>
+		<td title="11:30 - 13:00 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="11:30 - 14:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="10:30 - 13:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc"><nobr>&nbsp;10:30 - </nobr></td>
+		<td title="11:30 - 15:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_tc"><b>CALL</b></td>
+		<td title="11:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;11:30 - </nobr></td>
+		<td title="8:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="11:30 - 12:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="11:30 - 13:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="11:30 - 13:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_tc"><b>TSC</b></td>
+		<td title="11:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;11:30 - </nobr></td>
+		<td title="10:30 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;10:30 - </nobr></td>
+		<td title="8:00 - 12:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="10:30 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;10:30 - </nobr></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="11:00 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;11:00 - </nobr></td>
+		<td class="workCount">10</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">12:00</td>
+		<td title="11:30 - 12:30 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_bt">12:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="11:00 - 14:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"><nobr>&nbsp;11:00 - </nobr></td>
+		<td title="12:00 - 12:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="11:30 - 13:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"><nobr>&nbsp;11:30 - </nobr></td>
+		<td title="11:30 - 13:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;11:30 - </nobr></td>
+		<td title="11:30 - 14:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_mc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="10:30 - 13:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc">13:30</td>
+		<td title="11:30 - 15:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"></td>
+		<td title="11:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">12:30</td>
+		<td title="8:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="12:00 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="11:30 - 13:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;11:30 - </nobr></td>
+		<td title="11:30 - 13:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_mc"><nobr>&nbsp;11:30 - </nobr></td>
+		<td title="11:30 - 12:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">12:30</td>
+		<td title="10:30 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc">13:00</td>
+		<td title="8:00 - 12:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="10:30 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc">13:00</td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="12:00 - 12:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="11:00 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc">13:00</td>
+		<td class="workCount">10</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">12:30</td>
+		<td title="12:30 - 14:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="11:00 - 14:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc">14:00</td>
+		<td title="12:30 - 13:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><nobr>&nbsp;12:30 - </nobr></td>
+		<td title="11:30 - 13:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc">13:30</td>
+		<td title="11:30 - 13:00 (Class)" style="margin:0 2px 0 2px;" class="class_bt">13:00</td>
+		<td title="11:30 - 14:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_mc"><nobr>&nbsp;11:30 - </nobr></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="10:30 - 13:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc"></td>
+		<td title="11:30 - 15:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"></td>
+		<td title="12:30 - 15:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="12:00 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="11:30 - 13:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">13:30</td>
+		<td title="11:30 - 13:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_mc">13:30</td>
+		<td title="12:30 - 13:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tc"><nobr>&nbsp;12:30 - </nobr></td>
+		<td title="10:30 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt"></td>
+		<td title="12:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="10:30 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt"></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">16:30</td>
+		<td title="12:30 - 16:00 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_tc"><b>LIB</b></td>
+		<td title="11:00 - 13:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt"></td>
+		<td class="workCount">12</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">13:00</td>
+		<td title="12:30 - 14:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;12:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="11:00 - 14:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"></td>
+		<td title="12:30 - 13:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt">13:30</td>
+		<td title="11:30 - 13:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_bt"></td>
+		<td title="13:00 - 13:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tt"></td>
+		<td title="11:30 - 14:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_mc">14:30</td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 16:00 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="10:30 - 13:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_bt"></td>
+		<td title="11:30 - 15:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"><nobr>&nbsp;11:30 - </nobr></td>
+		<td title="12:30 - 15:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="12:00 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="11:30 - 13:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="11:30 - 13:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_bt"></td>
+		<td title="12:30 - 13:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_bt">13:30</td>
+		<td title="13:00 - 15:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_tc"><b>TSC</b></td>
+		<td title="12:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="13:00 - 13:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="12:30 - 16:00 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">10</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">13:30</td>
+		<td title="12:30 - 14:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc">14:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="11:00 - 14:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_bt"></td>
+		<td title="13:30 - 16:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_tc"><b>HSD</b></td>
+		<td title="13:30 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="13:30 - 15:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tc"></td>
+		<td title="11:30 - 14:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_mc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc">18:30</td>
+		<td title="13:30 - 14:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;13:30 - </nobr></td>
+		<td title="13:00 - 16:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="13:30 - 14:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="11:30 - 15:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc">15:30</td>
+		<td title="12:30 - 15:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"><nobr>&nbsp;12:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="12:00 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;12:00 - </nobr></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:30 - 14:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tc"><nobr>&nbsp;13:30 - </nobr></td>
+		<td title="13:30 - 15:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_tc"><b>CLE</b></td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="13:00 - 15:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_mc"></td>
+		<td title="12:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="13:30 - 14:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tt"><b>CHD</b></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="12:30 - 16:00 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_mc"></td>
+		<td title="13:30 - 14:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;13:30 - </nobr></td>
+		<td class="workCount">10</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">14:00</td>
+		<td title="12:30 - 14:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt"></td>
+		<td title="14:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="14:00 - 15:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><nobr>&nbsp;14:00 - </nobr></td>
+		<td title="13:30 - 16:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc"></td>
+		<td title="13:30 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;13:30 - </nobr></td>
+		<td title="13:30 - 15:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"><nobr>&nbsp;13:30 - </nobr></td>
+		<td title="11:30 - 14:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_bt"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="13:30 - 14:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">14:30</td>
+		<td title="13:00 - 16:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;13:00 - </nobr></td>
+		<td title="14:00 - 16:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="11:30 - 15:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"></td>
+		<td title="12:30 - 15:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc">15:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="12:00 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc">15:30</td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:30 - 14:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_bt">14:30</td>
+		<td title="13:30 - 15:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"><nobr>&nbsp;13:30 - </nobr></td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="13:00 - 15:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_mc"><nobr>&nbsp;13:00 - </nobr></td>
+		<td title="12:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;12:30 - </nobr></td>
+		<td title="14:00 - 17:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_tc"><b>BEC</b></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="12:30 - 16:00 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_mc"><nobr>&nbsp;12:30 - </nobr></td>
+		<td title="13:30 - 14:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">14:30</td>
+		<td class="workCount">11</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">14:30</td>
+		<td title="14:30 - 15:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="14:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="14:00 - 15:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt">15:00</td>
+		<td title="13:30 - 16:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc"><nobr>&nbsp;13:30 - </nobr></td>
+		<td title="13:30 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc">15:30</td>
+		<td title="13:30 - 15:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_bt">15:00</td>
+		<td title="14:30 - 16:00 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 16:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc">16:00</td>
+		<td title="14:00 - 16:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"></td>
+		<td title="11:30 - 15:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"></td>
+		<td title="12:30 - 15:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;13:00 - </nobr></td>
+		<td title="12:00 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;13:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="14:30 - 15:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"><nobr>&nbsp;14:30 - </nobr></td>
+		<td title="13:30 - 15:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc">15:30</td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;13:30 - </nobr></td>
+		<td title="13:00 - 15:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_mc">15:30</td>
+		<td title="12:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">16:30</td>
+		<td title="14:00 - 17:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="12:30 - 16:00 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_mc">16:00</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">10</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">15:00</td>
+		<td title="15:00 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tt"><b>CHD</b></td>
+		<td title="14:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;14:00 - </nobr></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="15:00 - 16:00 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_tc"><nobr>&nbsp;15:00 - </nobr></td>
+		<td title="13:30 - 16:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc">16:30</td>
+		<td title="13:30 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt"></td>
+		<td title="15:00 - 15:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tt"></td>
+		<td title="14:30 - 16:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;14:30 - </nobr></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 16:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="14:00 - 16:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;14:00 - </nobr></td>
+		<td title="11:30 - 15:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_bt"></td>
+		<td title="12:30 - 15:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc">17:00</td>
+		<td title="12:00 - 15:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">16:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="14:30 - 15:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt">15:30</td>
+		<td title="13:30 - 15:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_bt"></td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">16:30</td>
+		<td title="13:00 - 15:30 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_bt"></td>
+		<td title="12:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="14:00 - 17:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"><nobr>&nbsp;14:00 - </nobr></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="12:30 - 16:00 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">11</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">15:30</td>
+		<td title="15:30 - 16:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_tc"><nobr>&nbsp;15:30 - </nobr></td>
+		<td title="14:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc">17:00</td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="15:00 - 16:00 (Working at TSC)" style="margin:0 2px 0 2px;" class="work_TSC_bt">16:00</td>
+		<td title="13:30 - 16:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc"></td>
+		<td title="15:30 - 17:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tc"></td>
+		<td title="15:30 - 19:00 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="14:30 - 16:00 (Class)" style="margin:0 2px 0 2px;" class="class_bt">16:00</td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="15:30 - 18:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_tc"><b>CLE</b></td>
+		<td title="13:00 - 16:00 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="14:00 - 16:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc">16:30</td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="15:30 - 17:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="15:30 - 16:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;8:00 - </nobr></td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_tc"></td>
+		<td title="12:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="14:00 - 17:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc">17:00</td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="12:30 - 16:00 (Working at LIB)" style="margin:0 2px 0 2px;" class="work_LIB_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">8</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">16:00</td>
+		<td title="15:30 - 16:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_bt">16:30</td>
+		<td title="14:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">23:30</td>
+		<td title="16:00 - 16:30 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="13:30 - 16:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_bt"></td>
+		<td title="15:30 - 17:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"><nobr>&nbsp;15:30 - </nobr></td>
+		<td title="15:30 - 19:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="16:00 - 18:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="15:30 - 18:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="14:00 - 16:30 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="15:30 - 17:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;15:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">23:30</td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="13:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="12:30 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="14:00 - 17:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"></td>
+		<td title="8:00 - 16:30 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="16:00 - 17:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><nobr>&nbsp;16:00 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">7</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">16:30</td>
+		<td title="16:30 - 18:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><b>CHD</b></td>
+		<td title="14:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="16:30 - 17:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="15:30 - 17:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_bt">17:00</td>
+		<td title="15:30 - 19:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="16:00 - 18:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_mc"><nobr>&nbsp;16:00 - </nobr></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="15:30 - 18:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"><nobr>&nbsp;15:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;15:30 - </nobr></td>
+		<td title="15:30 - 17:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt">17:00</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="13:00 - 17:00 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 18:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_tc"><b>HSD</b></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;15:30 - </nobr></td>
+		<td title="16:30 - 17:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tc"><nobr>&nbsp;16:30 - </nobr></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;15:30 - </nobr></td>
+		<td title="16:30 - 21:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_tc"><b>CALL</b></td>
+		<td title="14:00 - 17:00 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_bt"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="16:00 - 17:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt">17:00</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">7</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">17:00</td>
+		<td title="16:30 - 18:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_mc"><nobr>&nbsp;16:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 19:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc"><nobr>&nbsp;15:30 - </nobr></td>
+		<td title="16:00 - 18:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_mc">18:00</td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;11:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="15:30 - 18:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc">18:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">18:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="17:00 - 21:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_tc"><b>BEC</b></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 18:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc"><nobr>&nbsp;16:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">18:30</td>
+		<td title="16:30 - 17:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_bt">17:30</td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc">18:30</td>
+		<td title="16:30 - 21:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"></td>
+		<td title="17:00 - 18:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_tc"><nobr>&nbsp;17:00 - </nobr></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">6</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">17:30</td>
+		<td title="16:30 - 18:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt">18:00</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 19:00 (Class)" style="margin:0 2px 0 2px;" class="class_mc">19:00</td>
+		<td title="16:00 - 18:00 (Preference 1)" style="margin:0 2px 0 2px;" class="none_bt"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">23:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;" class="vacation_mc"></td>
+		<td title="15:30 - 18:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="17:00 - 21:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 18:30 (Working at HSD lab)" style="margin:0 2px 0 2px;" class="work_HSD_mc">18:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;" class="class_mc"></td>
+		<td title="16:30 - 21:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"></td>
+		<td title="17:00 - 18:00 (Working at CHD)" style="margin:0 2px 0 2px;" class="work_CHD_bt">18:00</td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">6</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">18:00</td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="15:30 - 19:00 (Class)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="class_mc"></td>
+		<td title="18:00 - 18:30 (Preference 2)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="none_tt"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="na_mc"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="na_tc"></td>
+		<td title="8:00 - 18:30 (Vacation)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="vacation_bt"></td>
+		<td title="15:30 - 18:30 (Working at CLE lab)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="work_CLE_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="class_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="17:00 - 21:30 (Working at BEC lab)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="work_BEC_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="na_mc"></td>
+		<td title="16:30 - 18:30 (Working at HSD lab)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="work_HSD_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="class_bt"></td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="na_mc"></td>
+		<td title="15:30 - 18:30 (Class)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="class_bt"></td>
+		<td title="16:30 - 21:30 (Working at CALL lab)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="work_CALL_mc"></td>
+		<td title="18:00 - 18:30 (Preference 1)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="none_tt"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;border-top:solid 4px #222;border-bottom:solid 4px #222" class="_"></td>
+		<td class="workCount">4</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">18:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="15:30 - 19:00 (Class)" style="margin:0 2px 0 2px;" class="class_bt"></td>
+		<td title="18:30 - 23:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_tc"><b>CLE</b></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="17:00 - 21:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:30 - 19:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="18:30 - 22:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tc"></td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:30 - 21:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_tc"></td>
+		<td title="16:30 - 21:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"><nobr>&nbsp;16:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">3</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">19:00</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="19:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="18:30 - 23:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="17:00 - 21:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"><nobr>&nbsp;17:00 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="18:30 - 22:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"></td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:30 - 21:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"></td>
+		<td title="16:30 - 21:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc">21:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">3</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">19:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;16:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="19:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:30 - 23:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="17:00 - 21:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc">21:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="18:30 - 22:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"></td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:30 - 21:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"><nobr>&nbsp;18:30 - </nobr></td>
+		<td title="16:30 - 21:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;16:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">3</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">20:00</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">23:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="19:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:30 - 23:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="17:00 - 21:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="18:30 - 22:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"><nobr>&nbsp;18:30 - </nobr></td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;17:30 - </nobr></td>
+		<td title="18:30 - 21:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc">21:30</td>
+		<td title="16:30 - 21:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">23:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">3</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">20:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="19:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:30 - 23:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"><nobr>&nbsp;18:30 - </nobr></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;18:00 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="17:00 - 21:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="18:30 - 22:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc">22:00</td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">23:30</td>
+		<td title="18:30 - 21:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"></td>
+		<td title="16:30 - 21:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">3</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">21:00</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="19:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;19:00 - </nobr></td>
+		<td title="18:30 - 23:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc">23:30</td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">23:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="17:00 - 21:30 (Working at BEC lab)" style="margin:0 2px 0 2px;" class="work_BEC_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="18:30 - 22:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_mc"></td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:30 - 21:30 (Preference 2)" style="margin:0 2px 0 2px;" class="none_bt"></td>
+		<td title="16:30 - 21:30 (Working at CALL lab)" style="margin:0 2px 0 2px;" class="work_CALL_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">3</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">21:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="19:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">23:30</td>
+		<td title="18:30 - 23:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="18:30 - 22:00 (Preference 2)" style="margin:0 2px 0 2px;" class="none_bt"></td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="21:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="21:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">1</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">22:00</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="19:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:30 - 23:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="22:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_tc"></td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="21:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;21:30 - </nobr></td>
+		<td title="21:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;21:30 - </nobr></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">1</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">22:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="19:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:30 - 23:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_mc"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="22:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"><nobr>&nbsp;22:00 - </nobr></td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="21:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">23:30</td>
+		<td title="21:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc">23:30</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_mc"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">1</td></tr>
+<tr style="border-bottom:solid 1px #222;">
+		<td style="text-align:right;width:50px">23:00</td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="19:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="18:30 - 23:30 (Working at CLE lab)" style="margin:0 2px 0 2px;" class="work_CLE_bt"></td>
+		<td title="11:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="18:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="8:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="22:00 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt">23:30</td>
+		<td title="17:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="21:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="21:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="16:30 - 23:30 (Unavailable)" style="margin:0 2px 0 2px;" class="na_bt"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td title="" style="margin:0 2px 0 2px;" class="_"></td>
+		<td class="workCount">1</td></tr>
+<tr><td style="border-right:solid 1px white;border-left:solid 1px white" colspan="34">&nbsp;</td></tr><tr style="border-bottom:solid 1px #222;border-top:solid 1px #222"><td style="text-align:center;border-right:solid 1px #222">Working</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">6.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">6.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">7.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">7.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">5.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">3.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">7.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">4.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">3.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">4.5</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">4.5</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">2.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">3.5</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">2.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">2.5</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">5.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">7.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">4.5</td><td style="text-align:center;border-right:solid 1px #222;background:#ADD8E6">2.0</td><td style="border-right:solid 1px white;border-top:solid 1px white">&nbsp;</td></tr><tr style="border-bottom:solid 1px #222"><td style="text-align:center;border-right:solid 1px #222">Satellite</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">1.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">2.5</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">2.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">2.5</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="text-align:center;border-right:solid 1px #222;background:#FFCC99">0.0</td><td style="border-right:solid 1px white;border-top:solid 1px white"></td></tr><tr style="border-bottom:solid 1px #222"><td style="text-align:center;border-right:solid 1px #222">Total</td><td style="text-align:center;border-right:solid 1px #222">6.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">7.0</td><td style="text-align:center;border-right:solid 1px #222">7.0</td><td style="text-align:center;border-right:solid 1px #222">7.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">5.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">3.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">7.0</td><td style="text-align:center;border-right:solid 1px #222">4.0</td><td style="text-align:center;border-right:solid 1px #222">3.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">4.5</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">7.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">2.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">3.5</td><td style="text-align:center;border-right:solid 1px #222">4.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">5.0</td><td style="text-align:center;border-right:solid 1px #222">5.0</td><td style="text-align:center;border-right:solid 1px #222">7.0</td><td style="text-align:center;border-right:solid 1px #222">0.0</td><td style="text-align:center;border-right:solid 1px #222">4.5</td><td style="text-align:center;border-right:solid 1px #222">2.0</td><td style="border-right:solid 1px white;border-top:solid 1px white;border-bottom:solid 1px white;">&nbsp;</td></tr></tbody></table></div>
+<script type="text/javascript">
+/********************************
+ *      UPDATE CONSULTANTS      *
+ ********************************/
+var consultObj = createRequestObject();
+
+function showTable(){
+        var start= 1585296000;
+	var end= 1585351800;
+        var schedule_group=elem('schedule_group').options[elem('schedule_group').selectedIndex].value;
+
+	update_nextpage(schedule_group);
+        if (consultObj==null){
+                alert ("Your browser does not support AJAX!");
+                return;
+        }
+        var url="rpc/schedule/showDaily.php";
+        url = url +"?start="+start;
+	url = url +"&end="+end;
+        url = url +"&schedule_group="+schedule_group;
+
+        consultObj.onreadystatechange=handleShowTable;
+        consultObj.open("GET",url,true);
+        consultObj.send(null);
+}
+
+function handleShowTable(){
+        if (consultObj.readyState==4){
+                var resp = consultObj.responseText;
+                if(resp.match("ERROR_SESSION")){
+                        //if the session dies, this will re-login
+                        window.location.href="index.php?next_page=login.php";
+                }else if(resp.match("ERROR_GROUP")){
+                        alert('The selected group is invalid');
+                }else{
+                        document.getElementById('tableSpace').innerHTML = resp;
+                }
+        }
+}
+
+function update_nextpage(group){
+	f_arrow=elem('forward_arrow');
+	b_arrow=elem('back_arrow');
+	h_elem=elem('hidden_group');
+
+	url=b_arrow.href.substring(0,b_arrow.href.lastIndexOf("&"));
+	url+="&schedule_group="+group;
+	b_arrow.href=url;
+
+	url=f_arrow.href.substring(0,f_arrow.href.lastIndexOf("&"));
+        url+="&schedule_group="+group;
+	f_arrow.href=url;
+
+	h_elem.value=group;
+}
+
+showTable();
+</script>
+
+<!--  PopCalendar(tag name and id must match) Tags should sit at the page bottom -->
+<iframe width="174" height="189" name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="scripts/websched/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; left:-500px; top:0px;">
+</iframe>
+
+
+
+</div>
+<div id="footer">
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td>Help Desk Framework version 2.10.0</td>
+</tr>
+<tr>
+<td><a href="http://www.uvic.ca/systems/contact/#section0-17">Report a bug</a></td>
+</tr>
+</tbody></table>
+</div>
+</div>
+
+
+
+
+</body></html>

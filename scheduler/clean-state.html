@@ -1,0 +1,203 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Help Desk Internal</title>
+<link rel="stylesheet" type="text/css" href="media/css/style.css" />
+<link rel="stylesheet" type="text/css" href="media/css/style-print.css" media="print" />
+<script src="media/js/ajaxFunctions.js"></script>
+<script src="media/js/searchBar.js"></script>
+<script src="media/js/jquery.min.js"></script>
+
+
+</head>
+<body>
+<div id="header" class="topbar">
+	<div id="logo"><img src="media/images/uvic-logo-inside.gif" /></div>
+	<div id="links"><a href="https://connect.uvic.ca/sites/systems/chd/wiki/SitePages/Home.aspx">Connect</a>|<a href="http://helpdesk.uvic.ca">Public Site</a>|<a>
+		Sunday, March 22nd	</a>
+	</div>
+	<div id="searchbox">
+					<table class="sBar">
+				<tr>
+					<td><div onclick="showHide()" id="magicButton"><img align='absmiddle' src='media/images/homer.png' ></div></td><td><div><img src="media/images/dd.bmp" onclick="showHide()"></div></td>
+					<td><input type="text" id="search" name="SearchString" onKeyPress="checkEnter(event)" /></td>
+					<td><img src="media/images/search.bmp" onclick="submitSearch()"></td>
+				</tr>
+			</table>
+
+			<div id="selections">
+				<table cellpadding=0 cellspacing=0 style="width:100%;" class="selector">
+					<tr onclick='switchSearch(0)'><td><img align='absmiddle' src='media/images/homer.png' ></td><td>Homer Search</td></tr><tr onclick='switchSearch(1)'><td><img align='absmiddle' src='media/images/rt.png' ></td><td>RT Tracker</td></tr><tr onclick='switchSearch(2)'><td><img align='absmiddle' src='media/images/dir.png' ></td><td>UVic Directory</td></tr><tr onclick='switchSearch(3)'><td><img align='absmiddle' src='media/images/google.png' ></td><td>Google Search</td></tr>				</table>
+			</div>
+
+		<script type="text/javascript">
+		addImage(0,"<img align='absmiddle' src='media/images/homer.png' >");
+addImage(1,"<img align='absmiddle' src='media/images/rt.png' >");
+addImage(2,"<img align='absmiddle' src='media/images/dir.png' >");
+addImage(3,"<img align='absmiddle' src='media/images/google.png' >");
+		</script>
+	</div>
+
+	<div id="login"><table style='padding:0px;margin:0px;white-space:nowrap' cellspacing=0 cellpadding=0 width=99%><tr>
+	<td width=100% align=right><img src="media/images/padlock.gif" /><a href="index.php?next_page=login.php">Log in</a></td>	</tr></table></div>
+</div>
+<div id="wrap">
+<div id="sidebar">
+<div id="Web Homer" class="navbox"><h3 onclick="toggle('Web Homer')" class="categ">Web Homer</h3><div id="Web Homer_sub" style="width:170px;display:none" class="subkeys"><a href="index.php?next_page=webhomer/index.php" >Index</a><br /><div class="line"></div></div></div>
+<div id="Netlink" class="navbox"><h3 onclick="toggle('Netlink')" class="categ">Netlink</h3><div id="Netlink_sub" style="width:170px;display:none" class="subkeys"><a href="index.php?next_page=netlink/secondary.php" >Apply for Secondary Netlink</a><br /><a href="index.php?next_page=netlink/change.php" >Change Netlink-ID</a><br /><a href="index.php?next_page=netlink/disklimit.php" >Increase Disk Size Limit</a><br /></div></div>
+<div id="Email Tools" class="navbox"><h3 onclick="toggle('Email Tools')" class="categ">Email Tools</h3><div id="Email Tools_sub" style="width:170px;display:none" class="subkeys"><a href="index.php?next_page=ecsAdmin/names.php" >Exchange Display Name</a><br /><a href="index.php?next_page=ecsAdmin/delegate.php" >Exchange Delegates</a><br /><div class="line"></div></div></div>
+<div id="Informed" class="navbox"><h3 onclick="toggle('Informed')" class="categ">Informed</h3><div id="Informed_sub" style="width:170px;display:none" class="subkeys"><a href="index.php?next_page=informed/view.php" >View Messages</a><br /><a href="index.php?next_page=informed/view_do.php&timing=0&refresh=300" >Legacy View</a><br /><a href="/view_rss.php" >Informed RSS Feed</a><br /><div class="line"></div><a href="index.php?next_page=informed/archive.php&page=1" >Informed Archive</a><br /><div class="line"></div><a href="index.php?next_page=informed/post.php" >Post Informed Message</a><br /><a href="index.php?next_page=informed/edit.php" >Edit Informed Message</a><br /><div class="line"></div><a href="index.php?next_page=informed/dashboard_post.php" >Post Dashboard Message</a><br /><a href="index.php?next_page=informed/dashboard_edit.php" >Edit Dashboard Message</a><br /><div class="line"></div><a href="index.php?next_page=informed/subscriptions.php" >My Email Subscriptions</a><br /></div></div>
+</div>
+<div id="main">
+<link rel='stylesheet' href='media/css/schedule.css' type='text/css' />
+
+<script>
+<!--
+
+/*
+Auto Refresh Page with Time script
+By JavaScript Kit (javascriptkit.com)
+Over 200+ free scripts here!
+*/
+
+var limit="424"
+
+function beginrefresh(){
+    if (!document.images)
+        return
+    if (limit==1)
+        window.location.reload()
+    else{
+        limit--
+        curmin=Math.floor(limit/60)
+        cursec=limit%60
+        if (curmin!=0)
+            curtime="page will refresh automatically in "+curmin+" minutes and "+cursec+" seconds"
+        else
+            curtime="page will refresh automatically in "+cursec+" seconds"
+        window.status=curtime
+        setTimeout("beginrefresh()",1000)
+    }
+}
+
+window.onload=beginrefresh
+//-->
+</script>
+
+<table width="98%" border="0" cellpadding="0" cellspacing="0" class="schedule_control">
+    <tr>
+	<td style='background:url(media/images/schedule/bg_grad.png) repeat-x'><nobr>Daily View</nobr></td>
+	 <td  style='background:url(media/images/schedule/bg_grad.png) repeat-x'><select id='schedule_group' onchange='showTable()'>
+                                <optgroup label="Custom Groupings">
+                                <option value="1,4" selected> CHD Analysts and CHD Co-ops </option>
+                                </optgroup>
+                                <optgroup label="Individual Groups">
+                                 <option value='1' >CHD Co-op</option><option value='4' >CUPE 4163 Senior Assistants</option>                                </optgroup>
+                                <optgroup label="All Units">
+                                <option value="1,4" selected>All Units</option>
+                                </optgroup>
+                                </select>
+				                                </td>
+        <td style='border-left:solid 2px #6593CF;border-right:solid 2px #6593CF;width:100%;vertical-align:middle;background:url(media/images/schedule/bg_grad.png) repeat-x' valign="top" nowrap><center>
+	<a id="back_arrow" class="schedule_fwdBack" href="index.php?next_page=schedule/viewAll.php&amp;dateTS=1584777600&amp;schedule_group=1,4">
+		<img style='border:none;vertical-align:middle' src='media/images/schedule/left_arrow.png' /></a>&nbsp;
+
+		<font size=3><b>Sunday Mar. 22, 2020</b></font>
+
+            <a id="forward_arrow" class="schedule_fwdBack" href="index.php?next_page=schedule/viewAll.php&amp;dateTS=1584950400&amp;schedule_group=1,4">
+		<img style='border:none;vertical-align:middle;' src='media/images/schedule/right_arrow.png' /></a>
+        </center></td>
+	<td style='background:url(media/images/schedule/bg_grad.png) repeat-x'><nobr>
+		<form name="pickDay">
+                <input type="hidden" name="next_page" value="schedule/viewAll.php" />
+		<input id='hidden_group' type="hidden" name="schedule_group" value="1,4" />
+		<input name="date" value="03/22/2020" size="11" onclick="this.blur();gfPop.fPopCalendar(document.pickDay.date);return false;" />
+		<input type="submit" name="changeDay" value="Go">
+            </form>
+	</nobr></td>
+    </tr>
+</table>
+</form>
+<br />
+<div id='tableSpace'>
+</div>
+<script type="text/javascript">
+/********************************
+ *      UPDATE CONSULTANTS      *
+ ********************************/
+var consultObj = createRequestObject();
+
+function showTable(){
+        var start= 1584864000;
+	var end= 1584919800;
+        var schedule_group=elem('schedule_group').options[elem('schedule_group').selectedIndex].value;
+
+	update_nextpage(schedule_group);
+        if (consultObj==null){
+                alert ("Your browser does not support AJAX!");
+                return;
+        }
+        var url="rpc/schedule/showDaily.php";
+        url = url +"?start="+start;
+	url = url +"&end="+end;
+        url = url +"&schedule_group="+schedule_group;
+
+        consultObj.onreadystatechange=handleShowTable;
+        consultObj.open("GET",url,true);
+        consultObj.send(null);
+}
+
+function handleShowTable(){
+        if (consultObj.readyState==4){
+                var resp = consultObj.responseText;
+                if(resp.match("ERROR_SESSION")){
+                        //if the session dies, this will re-login
+                        window.location.href="index.php?next_page=login.php";
+                }else if(resp.match("ERROR_GROUP")){
+                        alert('The selected group is invalid');
+                }else{
+                        document.getElementById('tableSpace').innerHTML = resp;
+                }
+        }
+}
+
+function update_nextpage(group){
+	f_arrow=elem('forward_arrow');
+	b_arrow=elem('back_arrow');
+	h_elem=elem('hidden_group');
+
+	url=b_arrow.href.substring(0,b_arrow.href.lastIndexOf("&"));
+	url+="&schedule_group="+group;
+	b_arrow.href=url;
+
+	url=f_arrow.href.substring(0,f_arrow.href.lastIndexOf("&"));
+        url+="&schedule_group="+group;
+	f_arrow.href=url;
+
+	h_elem.value=group;
+}
+
+showTable();
+</script>
+
+<!--  PopCalendar(tag name and id must match) Tags should sit at the page bottom -->
+<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="scripts/websched/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; left:-500px; top:0px;">
+</iframe>
+
+
+
+</div>
+<div id="footer">
+<table cellspacing="0" cellpadding="0">
+<tr>
+<td>Help Desk Framework version 2.10.0</td>
+</tr>
+<tr>
+<td><a href="http://www.uvic.ca/systems/contact/#section0-17">Report a bug</a></td>
+</tr>
+</table>
+</div>
+</div>
+</body>
+</html>
