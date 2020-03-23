@@ -18,8 +18,10 @@ def scrape(request):
     # print(driver.page_source)
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-    a = soup.find_all("table", class_="dailySchedule") 
+    a = soup.find_all("table", class_="dailySchedule")
     print(a)
     # print(soup.prettify())
 
     return HttpResponse("hello")
+
+scrape(None)
