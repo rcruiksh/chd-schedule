@@ -1,0 +1,6 @@
+phantomjs
+celery?
+beat?
+selenium
+beautifulsoup
+django
