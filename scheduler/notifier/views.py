@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.db.utils import IntegrityError
 
-import requests, json
+import requests, json, time, calendar
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
 from notifier.models import Consultant, Shift
+# from sqlite3 import IntegrityError
 
 def index(request):
     return HttpResponse("Hello, world. You're at the notifier index.")
@@ -35,7 +37,7 @@ def parseShift(shift):
     location = shift[-1].strip('(').strip(')')
     return start_time, end_time, location
 
-def scrape():
+def scrape(request):
 
     # TODO: fix var names
     # TODO: use django model to replace data structures
@@ -44,6 +46,11 @@ def scrape():
     # TODO: function for building sched first time vs not?
     # TODO: database tinkering. Use db1 for past schedule, db2 for current schedule. Compare db2 to db1, notify consultants if different, overwrite db1 values with db2 values, repeat.
     # this function should only write to db2 - current schedule
+    # TODO: API for adding/removing consultants. Verify by email?
+    # TODO: superuser and admin app setup
+    # TODO: test scripts
+    # TODO: handle crash due to long page load -- return a value and retry x times?
+
 
     # This is being used as a headless browser, since the schedule html is built by a JS Function
     # Just performing a get will return the page source, but does not contain the schedule html.
@@ -57,18 +64,35 @@ def scrape():
     first_time = True
     next_url = ""
 
+    months = {
+        "Jan.": "01",
+        "Feb.": "02",
+        "Mar.": "03",
+        "Apr.": "04",
+        "May.": "05",
+        "Jun.": "06",
+        "Jul.": "07",
+        "Aug.": "08",
+        "Sep.": "09",
+        "Oct.": "10",
+        "Nov.": "11",
+        "Dec.": "12"
+    }
+
+    days = 14
     for i in range(days):
         if not first_time:
             driver.get(next_url)
             time.sleep(3)
             soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-
         # For each shift, we need to get the date, time, location, and consultant
         # Get the date from the header above the schedule table
         sched_header = soup.find("table", class_="schedule_control")
         date = sched_header.find_next("b")
         date = date.text
+        date = date.split()[1:]
+        date = '-'.join([date[2], months[date[0]], date[1][:-1]])
 
         next_url = soup.select("a#forward_arrow")
         next_url = next_url[0]["href"]
@@ -78,9 +102,13 @@ def scrape():
         # This variable maps each consultant to their column index in the format {index: "consultant"}
         col_mappings = dict()
         col_index = 0
+        num_rows = 0
 
+        count = 0
         # There are 32 relevant rows in the schedule table
         while(num_rows < 32):
+            count += 1
+            # print(count)
             # use BeautifulSoup to iterate through HTML elements. This steps through table rows and cells
             sched = sched.find_next()
 
@@ -103,8 +131,45 @@ def scrape():
                         consultant = col_mappings[col_index]
                         consultant = Consultant.objects.get(first_name=consultant)#[0]
                         s = Shift(date=date, start_time=start_time, end_time=end_time, location=location, time_and_location=sched['title'], consultant=consultant)
+                        s.save()
                 except KeyError:
+                    pass
+                except IntegrityError:
                     pass
                 col_index += 1
 
         first_time = False
+    return HttpResponse("hello")
+
+def dbTestData(request):
+
+    names = ["Alexandra", "Amanda", "Andrew", "Blake", "Cassidy", "Catherine", "Chandula", "Christopher", "Claire", "Denzel", "Erin", "Ethan", "Gavin", "Georgia", "Gillian", "Hanna", "Jamie", "Kathy", "Katy", "Keanu", "Kendra", "Kutay", "Maggie", "Marcela", "Richard", "Sarah", "Scott", "Shaelyn", "Shannon", "Sophie", "Taryn", "Will"]
+
+    count = 0
+    for name in names:
+        c = Consultant(netlink="rcruiksh{}".format(count), email="rcruiksh{}@uvic.ca".format(count), first_name=name, last_name=name)
+        c.save()
+        count += 1
+
+    print(Consultant.objects.all())
+
+    return HttpResponse("hello")
+
+def clearDB(request):
+    for item in Consultant.objects.all():
+        item.delete()
+    # due to on delete cascade this should also empty out the shift table
+    print(Consultant.objects.all())
+    print(Shift.objects.all())
+    return HttpResponse("hello")
+
+def queryDB(request):
+    c = Consultant.objects.get(first_name="Richard")
+    s = Shift.objects.filter(consultant=c)
+    for shift in s:
+        print(shift.date)
+        print(shift.start_time)
+        print("\n")
+    # print(Consultant.objects.all())
+    # print(Shift.objects.all())
+    return HttpResponse("hello")
