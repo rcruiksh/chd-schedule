@@ -37,19 +37,23 @@ def parseShift(shift):
     location = shift[-1].strip('(').strip(')')
     return start_time, end_time, location
 
+def compare(request):
+
+
+
+    return HttpResponse("hello")
+
 def scrape(request):
 
     # TODO: fix var names
-    # TODO: use django model to replace data structures
-    # TODO: build schedule over multiple days
     # TODO: compare past sched with current
-    # TODO: function for building sched first time vs not?
     # TODO: database tinkering. Use db1 for past schedule, db2 for current schedule. Compare db2 to db1, notify consultants if different, overwrite db1 values with db2 values, repeat.
     # this function should only write to db2 - current schedule
     # TODO: API for adding/removing consultants. Verify by email?
     # TODO: superuser and admin app setup
     # TODO: test scripts
     # TODO: handle crash due to long page load -- return a value and retry x times?
+    # TODO: general error handling. Don't email people if something breaks
 
 
     # This is being used as a headless browser, since the schedule html is built by a JS Function
@@ -58,7 +62,7 @@ def scrape(request):
     driver = webdriver.PhantomJS() # TODO: phontomJS is deprecated, replace with headless
     url = 'https://helpdesk.uvic.ca/tools/index.php?next_page=schedule/viewAll.php'
     driver.get(url)
-    time.sleep(3)
+    time.sleep(5)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     first_time = True
@@ -83,7 +87,7 @@ def scrape(request):
     for i in range(days):
         if not first_time:
             driver.get(next_url)
-            time.sleep(3)
+            time.sleep(5)
             soup = BeautifulSoup(driver.page_source, 'html.parser')
 
         # For each shift, we need to get the date, time, location, and consultant
@@ -110,8 +114,11 @@ def scrape(request):
             count += 1
             # print(count)
             # use BeautifulSoup to iterate through HTML elements. This steps through table rows and cells
-            sched = sched.find_next()
-
+            try:
+                sched = sched.find_next()
+            # if the page takes too long to load, sched will be NoneType, in which case we need to retry
+            except AttributeError:
+                return HttpResponse("timed out. please retry")
             # all th entries are the names of consultants as column headings
             if sched.name == "th":
                 col_mappings[col_index] = ''.join(sched.text.split()) #removes all whitespace
@@ -129,9 +136,9 @@ def scrape(request):
                         # consultants[col_index]["schedule"][date].add(sched['title'])
                         start_time, end_time, location = parseShift(sched['title'])
                         consultant = col_mappings[col_index]
-                        consultant = Consultant.objects.get(first_name=consultant)#[0]
+                        consultant = Consultant.objects.using('current').get(first_name=consultant)#[0]
                         s = Shift(date=date, start_time=start_time, end_time=end_time, location=location, time_and_location=sched['title'], consultant=consultant)
-                        s.save()
+                        s.save(using='current')
                 except KeyError:
                     pass
                 except IntegrityError:
@@ -148,28 +155,28 @@ def dbTestData(request):
     count = 0
     for name in names:
         c = Consultant(netlink="rcruiksh{}".format(count), email="rcruiksh{}@uvic.ca".format(count), first_name=name, last_name=name)
-        c.save()
+        c.save(using='current')
         count += 1
 
-    print(Consultant.objects.all())
+    print(Consultant.objects.using('current').all())
 
     return HttpResponse("hello")
 
 def clearDB(request):
-    for item in Consultant.objects.all():
-        item.delete()
+    for item in Consultant.objects.using('current').all():
+        item.delete(using='current')
     # due to on delete cascade this should also empty out the shift table
-    print(Consultant.objects.all())
-    print(Shift.objects.all())
+    print(Consultant.objects.using('current').all())
+    print(Shift.objects.using('current').all())
     return HttpResponse("hello")
 
 def queryDB(request):
-    c = Consultant.objects.get(first_name="Richard")
-    s = Shift.objects.filter(consultant=c)
+    c = Consultant.objects.using('current').get(first_name="Richard")
+    s = Shift.objects.using('current').filter(consultant=c)
     for shift in s:
         print(shift.date)
         print(shift.start_time)
-        print("\n")
-    # print(Consultant.objects.all())
-    # print(Shift.objects.all())
+        print()
+    # print(Consultant.objects.using('current').all())
+    # print(Shift.objects.using('current').all())
     return HttpResponse("hello")
