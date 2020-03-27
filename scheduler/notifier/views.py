@@ -37,13 +37,7 @@ def parseShift(shift):
     location = shift[-1].strip('(').strip(')')
     return start_time, end_time, location
 
-def compare(request):
-
-
-
-    return HttpResponse("hello")
-
-def scrape(request):
+def scrape():
 
     # TODO: fix var names
     # TODO: compare past sched with current
@@ -55,6 +49,9 @@ def scrape(request):
     # TODO: handle crash due to long page load -- return a value and retry x times?
     # TODO: general error handling. Don't email people if something breaks
 
+    # start with a clean slate in the database
+    for item in Shift.objects.using('current').all():
+        item.delete(using='current')
 
     # This is being used as a headless browser, since the schedule html is built by a JS Function
     # Just performing a get will return the page source, but does not contain the schedule html.
@@ -108,17 +105,15 @@ def scrape(request):
         col_index = 0
         num_rows = 0
 
-        count = 0
-        # There are 32 relevant rows in the schedule table
-        while(num_rows < 32):
-            count += 1
-            # print(count)
+        # There are 32 relevant rows in the schedule table (one for every 30 mins from 8am-11pm plus one for the header)
+        while (num_rows < 32):
             # use BeautifulSoup to iterate through HTML elements. This steps through table rows and cells
             try:
                 sched = sched.find_next()
             # if the page takes too long to load, sched will be NoneType, in which case we need to retry
             except AttributeError:
-                return HttpResponse("timed out. please retry")
+                return 0
+
             # all th entries are the names of consultants as column headings
             if sched.name == "th":
                 col_mappings[col_index] = ''.join(sched.text.split()) #removes all whitespace
@@ -146,9 +141,61 @@ def scrape(request):
                 col_index += 1
 
         first_time = False
+    return 1
+
+
+# overwrite past data with current data, then refresh current data, then compare
+def compare(request):
+    # start with a clean slate in the past database
+    for item in Shift.objects.using('past').all():
+        item.delete(using='past')
+
+    # overwrite past data with what's in current
+    for item in Shift.objects.using('current').all():
+        duplicate = Shift(
+            date=item.date,
+            start_time=item.start_time,
+            end_time=item.end_time,
+            location=item.location,
+            time_and_location=item.time_and_location,
+            consultant=Consultant.objects.using('past').get(netlink=item.consultant.netlink)
+        )
+        duplicate.save(using='past')
+
+    # refresh current data
+    attempts = 0
+    result = 0
+    while (result != 1 and attempts < 10):
+        result = scrape()
+        attempts += 1
+
+    # if scrape did not succeed after 10 attempts, raise an alert?
+    if result == 0:
+        pass #TODO implement this
+
+    current_consultants = Consultant.objects.using('current').all()
+
+    for consultant in current_consultants:
+        current_shifts = Shift.objects.using('current').filter(consultant=consultant)
+        current_shifts = set(current_shifts)
+
+        past_consultant = Consultant.objects.using('past').get(netlink=consultant.netlink)
+        past_shifts = Shift.objects.using('past').filter(consultant=past_consultant)
+        past_shifts = set(past_shifts)
+
+        print(current_shifts.symmetric_difference(past_shifts)) # Lol this didn't work
+
+    # c = Consultant.objects.using('past').get(first_name="Richard")
+    # s = Shift.objects.using('past').filter(consultant=c)
+    # for shift in s:
+    #     print(shift.date)
+    #     print(shift.start_time)
+    #     print()
+
     return HttpResponse("hello")
 
-def dbTestData(request):
+
+def dbTestDataCurrent(request):
 
     names = ["Alexandra", "Amanda", "Andrew", "Blake", "Cassidy", "Catherine", "Chandula", "Christopher", "Claire", "Denzel", "Erin", "Ethan", "Gavin", "Georgia", "Gillian", "Hanna", "Jamie", "Kathy", "Katy", "Keanu", "Kendra", "Kutay", "Maggie", "Marcela", "Richard", "Sarah", "Scott", "Shaelyn", "Shannon", "Sophie", "Taryn", "Will"]
 
@@ -162,6 +209,21 @@ def dbTestData(request):
 
     return HttpResponse("hello")
 
+def dbTestDataPast(request):
+
+    names = ["Alexandra", "Amanda", "Andrew", "Blake", "Cassidy", "Catherine", "Chandula", "Christopher", "Claire", "Denzel", "Erin", "Ethan", "Gavin", "Georgia", "Gillian", "Hanna", "Jamie", "Kathy", "Katy", "Keanu", "Kendra", "Kutay", "Maggie", "Marcela", "Richard", "Sarah", "Scott", "Shaelyn", "Shannon", "Sophie", "Taryn", "Will"]
+
+    count = 0
+    for name in names:
+        c = Consultant(netlink="rcruiksh{}".format(count), email="rcruiksh{}@uvic.ca".format(count), first_name=name, last_name=name)
+        c.save(using='past')
+        count += 1
+
+    print(Consultant.objects.using('past').all())
+
+    return HttpResponse("hello")
+
+
 def clearDB(request):
     for item in Consultant.objects.using('current').all():
         item.delete(using='current')
@@ -169,6 +231,7 @@ def clearDB(request):
     print(Consultant.objects.using('current').all())
     print(Shift.objects.using('current').all())
     return HttpResponse("hello")
+
 
 def queryDB(request):
     c = Consultant.objects.using('current').get(first_name="Richard")
