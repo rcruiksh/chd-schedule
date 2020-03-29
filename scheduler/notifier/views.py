@@ -31,7 +31,6 @@ def scrape():
     # TODO: handle crash due to long page load -- return a value and retry x times?
     # TODO: general error handling. Don't email people if something breaks
     # TODO: scheduling (with celery?)
-    # TODO: email notifications
     # TODO: testing with actual changed schedule - do emails get sent?
     # TODO: dockerize it?
 

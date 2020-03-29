@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Vancouver'
 
 USE_I18N = True
 
@@ -124,3 +124,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Celery stuff
+# from celery.schedules import crontab
+CELERY_BROKER_URL = 'redis://localhost:6379'
+# If time zones are active (USE_TZ = True) define your local
+CELERY_TIMEZONE = 'America/Vancouver'
+# notifier.conf.enable_utc = False # so celery doesn't take utc by default
+# We're going to have our tasks rolling soon, so that will be handy
+CELERY_BEAT_SCHEDULE = {
+ 'scrape_and_notify_every_minute': {
+       'task': 'scrape_and_notify',
+        # There are 4 ways we can handle time, read further
+       'schedule': 60.0,
+    },
+}

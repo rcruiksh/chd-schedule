@@ -4,3 +4,5 @@ beat?
 selenium
 beautifulsoup
 django
+redis (start w/ redis-server) -> look into running this as a service
+Docker!! Will make deployment sooo much easier
