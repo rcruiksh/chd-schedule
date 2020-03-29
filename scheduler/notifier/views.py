@@ -40,14 +40,13 @@ def parseShift(shift):
 def scrape():
 
     # TODO: fix var names
-    # TODO: compare past sched with current
-    # TODO: database tinkering. Use db1 for past schedule, db2 for current schedule. Compare db2 to db1, notify consultants if different, overwrite db1 values with db2 values, repeat.
-    # this function should only write to db2 - current schedule
     # TODO: API for adding/removing consultants. Verify by email?
     # TODO: superuser and admin app setup
     # TODO: test scripts
     # TODO: handle crash due to long page load -- return a value and retry x times?
     # TODO: general error handling. Don't email people if something breaks
+    # TODO: scheduling (with celery?)
+    # TODO: email notifications
 
     # start with a clean slate in the database
     for item in Shift.objects.using('current').all():
@@ -143,6 +142,28 @@ def scrape():
         first_time = False
     return 1
 
+# return True if shifts are same, false otherwise
+def compareShifts(shift1, shift2):
+    if shift1.date == shift2.date and shift1.time_and_location == shift2.time_and_location:
+        return True
+    return False
+
+def findDifferences(past_shifts, current_shifts):
+    i = 0
+    j = 0
+    while i < len(past_shifts):
+        # match_flag = False
+        while j < len(current_shifts):
+            if compareShifts(past_shifts[i], current_shifts[j]):
+                past_shifts.remove(past_shifts[i])
+                current_shifts.remove(current_shifts[j])
+                i -= 1
+                break
+            j += 1
+        i += 1
+
+    return past_shifts, current_shifts
+
 
 # overwrite past data with current data, then refresh current data, then compare
 def compare(request):
@@ -177,20 +198,14 @@ def compare(request):
 
     for consultant in current_consultants:
         current_shifts = Shift.objects.using('current').filter(consultant=consultant)
-        current_shifts = set(current_shifts)
+        current_shifts = list(current_shifts)
 
         past_consultant = Consultant.objects.using('past').get(netlink=consultant.netlink)
         past_shifts = Shift.objects.using('past').filter(consultant=past_consultant)
-        past_shifts = set(past_shifts)
+        past_shifts = list(past_shifts)
 
-        print(current_shifts.symmetric_difference(past_shifts)) # Lol this didn't work
-
-    # c = Consultant.objects.using('past').get(first_name="Richard")
-    # s = Shift.objects.using('past').filter(consultant=c)
-    # for shift in s:
-    #     print(shift.date)
-    #     print(shift.start_time)
-    #     print()
+        past, present = findDifferences(past_shifts, current_shifts)
+        print(past, present)
 
     return HttpResponse("hello")
 
