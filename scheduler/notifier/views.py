@@ -1,34 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.utils import IntegrityError
+from django.core.mail import send_mail
 
 import requests, json, time, calendar
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
 from notifier.models import Consultant, Shift
-# from sqlite3 import IntegrityError
+
 
 def index(request):
     return HttpResponse("Hello, world. You're at the notifier index.")
 
-# def scrape(request):
-#     # data = requests.get("https://helpdesk.uvic.ca/tools/index.php?next_page=schedule/viewAll.php")
-#     # print(str(data.text), file=open("data.html", "w"))
-#
-#     url = 'https://helpdesk.uvic.ca/tools/index.php?next_page=schedule/viewAll.php'
-#     driver = webdriver.PhantomJS()#executable_path='~/Library/phantomjs-2.1.1-macosx/bin/phantomjs')
-#     driver.get(url)
-#     # print(driver.page_source)
-#
-#     soup = BeautifulSoup(driver.page_source, 'html.parser')
-#     a = soup.find_all("table", class_="dailySchedule")
-#     print(a)
-#     # print(soup.prettify())
-#
-#     return HttpResponse("hello")
-#
-# scrape(None)
 
 def parseShift(shift):
     shift = shift.split()
@@ -36,6 +20,7 @@ def parseShift(shift):
     end_time = shift[2]
     location = shift[-1].strip('(').strip(')')
     return start_time, end_time, location
+
 
 def scrape():
 
@@ -47,6 +32,8 @@ def scrape():
     # TODO: general error handling. Don't email people if something breaks
     # TODO: scheduling (with celery?)
     # TODO: email notifications
+    # TODO: testing with actual changed schedule - do emails get sent?
+    # TODO: dockerize it?
 
     # start with a clean slate in the database
     for item in Shift.objects.using('current').all():
@@ -142,11 +129,13 @@ def scrape():
         first_time = False
     return 1
 
+
 # return True if shifts are same, false otherwise
 def compareShifts(shift1, shift2):
     if shift1.date == shift2.date and shift1.time_and_location == shift2.time_and_location:
         return True
     return False
+
 
 def findDifferences(past_shifts, current_shifts):
     i = 0
@@ -204,14 +193,24 @@ def compare(request):
         past_shifts = Shift.objects.using('past').filter(consultant=past_consultant)
         past_shifts = list(past_shifts)
 
-        past, present = findDifferences(past_shifts, current_shifts)
-        print(past, present)
+        removed, added = findDifferences(past_shifts, current_shifts)
+        # print('\n'.join(removed))
+
+        # print('''Hi {},\nYour schedule has been updated.\n\nRemoved shifts: {}\n\nAdded shifts: {}\n\nPlease email chdsuper if you have any questions.\n\nRegards\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)))
+
+        if len(removed) != 0 or len(added) != 0:
+            send_mail(
+                'Your Computer Help Desk schedule has been changed',
+                '''Hi {},\nYour schedule has been updated.\n\nRemoved shifts:\n{}\n\nAdded shifts:\n{}\n\nPlease email chdsuper if you have any questions.\n\nRegards\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)),
+                'chdschdedule@uvic.ca',
+                ['{}'.format(consultant.email)],
+                fail_silently=False,
+            )
 
     return HttpResponse("hello")
 
 
 def dbTestDataCurrent(request):
-
     names = ["Alexandra", "Amanda", "Andrew", "Blake", "Cassidy", "Catherine", "Chandula", "Christopher", "Claire", "Denzel", "Erin", "Ethan", "Gavin", "Georgia", "Gillian", "Hanna", "Jamie", "Kathy", "Katy", "Keanu", "Kendra", "Kutay", "Maggie", "Marcela", "Richard", "Sarah", "Scott", "Shaelyn", "Shannon", "Sophie", "Taryn", "Will"]
 
     count = 0
@@ -225,7 +224,6 @@ def dbTestDataCurrent(request):
     return HttpResponse("hello")
 
 def dbTestDataPast(request):
-
     names = ["Alexandra", "Amanda", "Andrew", "Blake", "Cassidy", "Catherine", "Chandula", "Christopher", "Claire", "Denzel", "Erin", "Ethan", "Gavin", "Georgia", "Gillian", "Hanna", "Jamie", "Kathy", "Katy", "Keanu", "Kendra", "Kutay", "Maggie", "Marcela", "Richard", "Sarah", "Scott", "Shaelyn", "Shannon", "Sophie", "Taryn", "Will"]
 
     count = 0

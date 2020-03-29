@@ -17,3 +17,6 @@ class Shift(models.Model):
     class Meta:
         unique_together = ('time_and_location', 'consultant',)
         ordering = ('date', 'start_time')
+
+    def __str__(self):
+        return '{}: {}'.format(self.date, self.time_and_location)
