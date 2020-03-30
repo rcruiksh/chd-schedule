@@ -5,6 +5,7 @@ class Consultant(models.Model):
     email = models.EmailField()
     first_name = models.CharField(max_length = 50)
     last_name = models.CharField(max_length = 50)
+    
 
 class Shift(models.Model):
     date = models.DateField()

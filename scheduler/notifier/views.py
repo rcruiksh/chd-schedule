@@ -25,10 +25,10 @@ def dbTestDataCurrent(request):
     count = 0
     for name in names:
         c = Consultant(netlink="rcruiksh{}".format(count), email="rcruiksh{}@uvic.ca".format(count), first_name=name, last_name=name)
-        c.save(using='current')
+        c.save(using='default')
         count += 1
 
-    print(Consultant.objects.using('current').all())
+    print(Consultant.objects.using('default').all())
 
     return HttpResponse("hello")
 
@@ -47,21 +47,21 @@ def dbTestDataPast(request):
 
 
 def clearDB(request):
-    for item in Consultant.objects.using('current').all():
-        item.delete(using='current')
+    for item in Consultant.objects.using('default').all():
+        item.delete(using='default')
     # due to on delete cascade this should also empty out the shift table
-    print(Consultant.objects.using('current').all())
-    print(Shift.objects.using('current').all())
+    print(Consultant.objects.using('default').all())
+    print(Shift.objects.using('default').all())
     return HttpResponse("hello")
 
 
 def queryDB(request):
-    c = Consultant.objects.using('current').get(first_name="Richard")
-    s = Shift.objects.using('current').filter(consultant=c)
+    c = Consultant.objects.using('default').get(first_name="Richard")
+    s = Shift.objects.using('default').filter(consultant=c)
     for shift in s:
         print(shift.date)
         print(shift.start_time)
         print()
-    # print(Consultant.objects.using('current').all())
-    # print(Shift.objects.using('current').all())
+    # print(Consultant.objects.using('default').all())
+    # print(Shift.objects.using('default').all())
     return HttpResponse("hello")

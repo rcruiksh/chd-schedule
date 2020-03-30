@@ -21,8 +21,8 @@ def parseShift(shift):
 
 def scrape():
     # start with a clean slate in the database
-    for item in Shift.objects.using('current').all():
-        item.delete(using='current')
+    for item in Shift.objects.using('default').all():
+        item.delete(using='default')
 
     # This is being used as a headless browser, since the schedule html is built by a JS Function
     # Just performing a get will return the page source, but does not contain the schedule html.
@@ -102,9 +102,9 @@ def scrape():
                         # consultants[col_index]["schedule"][date].add(sched['title'])
                         start_time, end_time, location = parseShift(sched['title'])
                         consultant = col_mappings[col_index]
-                        consultant = Consultant.objects.using('current').get(first_name=consultant)#[0]
+                        consultant = Consultant.objects.using('default').get(first_name=consultant)#[0]
                         s = Shift(date=date, start_time=start_time, end_time=end_time, location=location, time_and_location=sched['title'], consultant=consultant)
-                        s.save(using='current')
+                        s.save(using='default')
                 except KeyError:
                     pass
                 except IntegrityError:
@@ -147,7 +147,7 @@ def scrapeAndNotify():
         item.delete(using='past')
 
     # overwrite past data with what's in current
-    for item in Shift.objects.using('current').all():
+    for item in Shift.objects.using('default').all():
         duplicate = Shift(
             date=item.date,
             start_time=item.start_time,
@@ -169,10 +169,10 @@ def scrapeAndNotify():
     if result == 0:
         pass #TODO implement this
 
-    current_consultants = Consultant.objects.using('current').all()
+    current_consultants = Consultant.objects.using('default').all()
 
     for consultant in current_consultants:
-        current_shifts = Shift.objects.using('current').filter(consultant=consultant)
+        current_shifts = Shift.objects.using('default').filter(consultant=consultant)
         current_shifts = list(current_shifts)
 
         past_consultant = Consultant.objects.using('past').get(netlink=consultant.netlink)
@@ -182,9 +182,6 @@ def scrapeAndNotify():
         removed, added = findDifferences(past_shifts, current_shifts)
         removed = [str(entry) for entry in removed]
         added = [str(entry) for entry in added]
-        # print('\n'.join(removed))
-
-        # print('''Hi {},\nYour schedule has been updated.\n\nRemoved shifts: {}\n\nAdded shifts: {}\n\nPlease email chdsuper if you have any questions.\n\nRegards\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)))
 
         if len(removed) != 0 or len(added) != 0:
             print('''Hi {},\nYour schedule has been updated.\n\nRemoved shifts:\n{}\n\nAdded shifts:\n{}\n\nPlease email chdsuper if you have any questions.\n\nRegards,\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)))
