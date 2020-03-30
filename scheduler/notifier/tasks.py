@@ -20,17 +20,6 @@ def parseShift(shift):
 
 
 def scrape():
-
-    # TODO: fix var names
-    # TODO: API for adding/removing consultants. Verify by email?
-    # TODO: superuser and admin app setup
-    # TODO: test scripts
-    # TODO: handle crash due to long page load -- return a value and retry x times?
-    # TODO: general error handling. Don't email people if something breaks
-    # TODO: scheduling (with celery?)
-    # TODO: testing with actual changed schedule - do emails get sent?
-    # TODO: dockerize it?
-
     # start with a clean slate in the database
     for item in Shift.objects.using('current').all():
         item.delete(using='current')
@@ -109,7 +98,7 @@ def scrape():
             # this is a new table cell
             elif sched.name == "td":
                 try:
-                    if sched['title'] != "" and "Preference" not in sched['title'] and "Unavailable" not in sched['title'] and "Class" not in sched['title']:
+                    if sched['title'] != "" and "Preference" not in sched['title'] and "Unavailable" not in sched['title'] and "Class" not in sched['title'] and "Exam" not in sched['title']:
                         # consultants[col_index]["schedule"][date].add(sched['title'])
                         start_time, end_time, location = parseShift(sched['title'])
                         consultant = col_mappings[col_index]
@@ -191,15 +180,17 @@ def scrapeAndNotify():
         past_shifts = list(past_shifts)
 
         removed, added = findDifferences(past_shifts, current_shifts)
+        removed = [str(entry) for entry in removed]
+        added = [str(entry) for entry in added]
         # print('\n'.join(removed))
 
         # print('''Hi {},\nYour schedule has been updated.\n\nRemoved shifts: {}\n\nAdded shifts: {}\n\nPlease email chdsuper if you have any questions.\n\nRegards\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)))
 
         if len(removed) != 0 or len(added) != 0:
-            print("I would send an email now")
+            print('''Hi {},\nYour schedule has been updated.\n\nRemoved shifts:\n{}\n\nAdded shifts:\n{}\n\nPlease email chdsuper if you have any questions.\n\nRegards,\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)))
             # send_mail(
             #     'Your Computer Help Desk schedule has been changed',
-            #     '''Hi {},\nYour schedule has been updated.\n\nRemoved shifts:\n{}\n\nAdded shifts:\n{}\n\nPlease email chdsuper if you have any questions.\n\nRegards\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)),
+            #     '''Hi {},\nYour schedule has been updated.\n\nRemoved shifts:\n{}\n\nAdded shifts:\n{}\n\nPlease email chdsuper if you have any questions.\n\nRegards,\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)),
             #     'chdschdedule@uvic.ca',
             #     ['{}'.format(consultant.email)],
             #     fail_silently=False,

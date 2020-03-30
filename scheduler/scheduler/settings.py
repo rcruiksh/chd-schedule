@@ -75,7 +75,10 @@ WSGI_APPLICATION = 'scheduler.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {},
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'default',
+    },
     'past': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': "past_data",
