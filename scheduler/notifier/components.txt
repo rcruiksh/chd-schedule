@@ -1,8 +1,9 @@
 phantomjs
-celery?
+celery -- need to use the scheduler and a worker my god the documentation is vague and bad
 beat?
 selenium
 beautifulsoup
 django
 redis (start w/ redis-server) -> look into running this as a service
 Docker!! Will make deployment sooo much easier
+https://medium.com/@ksarthak4ever/django-handling-periodic-tasks-with-celery-daaa2a146f14

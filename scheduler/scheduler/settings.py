@@ -134,9 +134,10 @@ CELERY_TIMEZONE = 'America/Vancouver'
 # notifier.conf.enable_utc = False # so celery doesn't take utc by default
 # We're going to have our tasks rolling soon, so that will be handy
 CELERY_BEAT_SCHEDULE = {
- 'scrape_and_notify_every_minute': {
+ 'scrape_and_notify_every_5_mins': {
        'task': 'scrape_and_notify',
         # There are 4 ways we can handle time, read further
-       'schedule': 60.0,
+       'schedule': 300.0,
     },
 }
+CELERY_ALWAYS_EAGER = True

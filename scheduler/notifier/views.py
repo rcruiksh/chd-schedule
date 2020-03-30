@@ -198,13 +198,14 @@ def compare(request):
         # print('''Hi {},\nYour schedule has been updated.\n\nRemoved shifts: {}\n\nAdded shifts: {}\n\nPlease email chdsuper if you have any questions.\n\nRegards\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)))
 
         if len(removed) != 0 or len(added) != 0:
-            send_mail(
-                'Your Computer Help Desk schedule has been changed',
-                '''Hi {},\nYour schedule has been updated.\n\nRemoved shifts:\n{}\n\nAdded shifts:\n{}\n\nPlease email chdsuper if you have any questions.\n\nRegards\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)),
-                'chdschdedule@uvic.ca',
-                ['{}'.format(consultant.email)],
-                fail_silently=False,
-            )
+            print("I would send an email now")
+            # send_mail(
+            #     'Your Computer Help Desk schedule has been changed',
+            #     '''Hi {},\nYour schedule has been updated.\n\nRemoved shifts:\n{}\n\nAdded shifts:\n{}\n\nPlease email chdsuper if you have any questions.\n\nRegards\nSchedule Notification Bot'''.format(consultant.first_name, '\n'.join(removed), '\n'.join(added)),
+            #     'chdschdedule@uvic.ca',
+            #     ['{}'.format(consultant.email)],
+            #     fail_silently=False,
+            # )
 
     return HttpResponse("hello")
 
