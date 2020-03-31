@@ -2,27 +2,36 @@ from celery import task
 from celery import shared_task
 
 from django.db.utils import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
+from django.forms.models import model_to_dict
 
-import json, time, calendar
+import json, time, os, pytz
 from selenium import webdriver
 from bs4 import BeautifulSoup
+from datetime import datetime
 
-from notifier.models import Consultant, Shift
+from notifier.models import Consultant, Shift, PastShift
 
 
+'''SHIFT CHANGE NOTIFICATION'''
 def parseShift(shift):
+    # 8:30 - 10:30 (Working at HSD lab)
     shift = shift.split()
-    start_time = shift[0]
-    end_time = shift[2]
-    location = shift[-1].strip('(').strip(')')
-    return start_time, end_time, location
+    location = (' ').join(shift[3:]).strip('(').strip(')')
+    start_time = shift[0].split(":")
+    start_hour = int(start_time[0])
+    start_min = int(start_time[1])
+    end_time = shift[2].split(":")
+    end_hour = int(end_time[0])
+    end_min = int(end_time[1])
+    return start_hour, start_min, end_hour, end_min, location
 
 
 def scrape():
     # start with a clean slate in the database
-    for item in Shift.objects.using('default').all():
-        item.delete(using='default')
+    for item in Shift.objects.all():
+        item.delete()
 
     # This is being used as a headless browser, since the schedule html is built by a JS Function
     # Just performing a get will return the page source, but does not contain the schedule html.
@@ -37,15 +46,15 @@ def scrape():
     next_url = ""
 
     months = {
-        "Jan.": "01",
-        "Feb.": "02",
-        "Mar.": "03",
-        "Apr.": "04",
-        "May.": "05",
-        "Jun.": "06",
-        "Jul.": "07",
-        "Aug.": "08",
-        "Sep.": "09",
+        "Jan.": "1",
+        "Feb.": "2",
+        "Mar.": "3",
+        "Apr.": "4",
+        "May.": "5",
+        "Jun.": "6",
+        "Jul.": "7",
+        "Aug.": "8",
+        "Sep.": "9",
         "Oct.": "10",
         "Nov.": "11",
         "Dec.": "12"
@@ -64,7 +73,9 @@ def scrape():
         date = sched_header.find_next("b")
         date = date.text
         date = date.split()[1:]
-        date = '-'.join([date[2], months[date[0]], date[1][:-1]])
+        year = int(date[2])
+        month = int(months[date[0]])
+        day = int(date[1][:-1])
 
         next_url = soup.select("a#forward_arrow")
         next_url = next_url[0]["href"]
@@ -100,14 +111,16 @@ def scrape():
                 try:
                     if sched['title'] != "" and "Preference" not in sched['title'] and "Unavailable" not in sched['title'] and "Class" not in sched['title'] and "Exam" not in sched['title']:
                         # consultants[col_index]["schedule"][date].add(sched['title'])
-                        start_time, end_time, location = parseShift(sched['title'])
+                        start_hour, start_min, end_hour, end_min, location = parseShift(sched['title'])
                         consultant = col_mappings[col_index]
-                        consultant = Consultant.objects.using('default').get(first_name=consultant)#[0]
-                        s = Shift(date=date, start_time=start_time, end_time=end_time, location=location, time_and_location=sched['title'], consultant=consultant)
-                        s.save(using='default')
-                except KeyError:
+                        consultant = Consultant.objects.get(first_name=consultant)#[0]
+                        s = Shift(year=year, month=month, day=day, start_hour=start_hour, start_min=start_min, end_hour=end_hour, end_min=end_min, location=location, time_and_location=sched['title'], consultant=consultant)
+                        s.save()
+                except KeyError: # if the sched doesn't have a 'title' attribute
                     pass
-                except IntegrityError:
+                except IntegrityError: # if the shift already exists in db, don't add it again
+                    pass
+                except ObjectDoesNotExist: # if the consultant hasn't been added to the db yet, don't build their schedule
                     pass
                 col_index += 1
 
@@ -117,7 +130,8 @@ def scrape():
 
 # return True if shifts are same, false otherwise
 def compareShifts(shift1, shift2):
-    if shift1.date == shift2.date and shift1.time_and_location == shift2.time_and_location:
+    # if shift1.date == shift2.date and shift1.time_and_location == shift2.time_and_location:
+    if model_to_dict(shift1) == model_to_dict(shift2):
         return True
     return False
 
@@ -143,20 +157,24 @@ def findDifferences(past_shifts, current_shifts):
 @task(name='scrape_and_notify')
 def scrapeAndNotify():
     # start with a clean slate in the past database
-    for item in Shift.objects.using('past').all():
-        item.delete(using='past')
+    for item in PastShift.objects.all():
+        item.delete()
 
     # overwrite past data with what's in current
-    for item in Shift.objects.using('default').all():
-        duplicate = Shift(
-            date=item.date,
-            start_time=item.start_time,
-            end_time=item.end_time,
+    for item in Shift.objects.all():
+        duplicate = PastShift(
+            year=item.year,
+            month=item.month,
+            day=item.day,
+            start_hour=item.start_hour,
+            start_min=item.start_min,
+            end_hour=item.end_hour,
+            end_min=item.end_min,
             location=item.location,
             time_and_location=item.time_and_location,
-            consultant=Consultant.objects.using('past').get(netlink=item.consultant.netlink)
+            consultant=Consultant.objects.get(netlink=item.consultant.netlink)
         )
-        duplicate.save(using='past')
+        duplicate.save()
 
     # refresh current data
     attempts = 0
@@ -169,14 +187,13 @@ def scrapeAndNotify():
     if result == 0:
         pass #TODO implement this
 
-    current_consultants = Consultant.objects.using('default').all()
+    consultants = Consultant.objects.all()
 
-    for consultant in current_consultants:
-        current_shifts = Shift.objects.using('default').filter(consultant=consultant)
+    for consultant in consultants:
+        current_shifts = Shift.objects.filter(consultant=consultant)
         current_shifts = list(current_shifts)
 
-        past_consultant = Consultant.objects.using('past').get(netlink=consultant.netlink)
-        past_shifts = Shift.objects.using('past').filter(consultant=past_consultant)
+        past_shifts = PastShift.objects.filter(consultant=consultant)
         past_shifts = list(past_shifts)
 
         removed, added = findDifferences(past_shifts, current_shifts)
@@ -192,3 +209,6 @@ def scrapeAndNotify():
             #     ['{}'.format(consultant.email)],
             #     fail_silently=False,
             # )
+    return
+
+'''ICAL GENERATION'''

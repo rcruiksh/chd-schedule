@@ -78,10 +78,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'current',
-    },
-    'past': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': "past",
     }
 }
 
