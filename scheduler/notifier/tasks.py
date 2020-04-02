@@ -130,10 +130,13 @@ def scrape():
 
 # return True if shifts are same, false otherwise
 def compareShifts(shift1, shift2):
-    # if shift1.date == shift2.date and shift1.time_and_location == shift2.time_and_location:
-    if model_to_dict(shift1) == model_to_dict(shift2):
-        return True
-    return False
+    shift1 = model_to_dict(shift1)
+    shift2 = model_to_dict(shift2)
+    match = True
+    for key in shift1.keys():
+        if shift1[key] != shift2[key] and key != 'id':
+            match = False
+    return match
 
 
 def findDifferences(past_shifts, current_shifts):
