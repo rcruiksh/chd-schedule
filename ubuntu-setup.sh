@@ -24,6 +24,8 @@ pyenv activate scheduler
 pip install --upgrade pip
 git clone https://github.com/rcruiksh/chd-schedule.git
 cd chd-schedule
+git checkout dev
+git pull origin dev
 pip install -r "requirements.txt"
 
 # setting up the app
@@ -32,6 +34,7 @@ python manage.py migrate
 python manage.py createsuperuser
 
 # running the app
+# cd scheduler
 # nohup python manage.py runserver > django.out &
 # nuhup redis-server > redis.out &
 # nohup celery -A scheduler worker > worker.out &
