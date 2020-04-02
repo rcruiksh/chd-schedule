@@ -35,8 +35,6 @@ def generateCalendar(request):
             event.add('dtend', datetime(shift.year,shift.month,shift.day,shift.end_hour,shift.end_min,0,tzinfo=tz))
             event.add('dtstamp', datetime(shift.year,shift.month,shift.day,0,0,0,tzinfo=tz))
             event['uid'] = dtstart.isoformat() + shift.location + shift.consultant.netlink
-            # event.add('priority', 5)
-
             cal.add_component(event)
 
     f = open('example.ics', 'wb')
