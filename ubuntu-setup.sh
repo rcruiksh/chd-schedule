@@ -26,6 +26,11 @@ git clone https://github.com/rcruiksh/chd-schedule.git
 cd chd-schedule
 pip install -r "requirements.txt"
 
+# setting up the app
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+
 # running the app
 # nohup python manage.py runserver > django.out &
 # nuhup redis-server > redis.out &
