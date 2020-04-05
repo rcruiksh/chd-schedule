@@ -8,6 +8,8 @@ from django.forms.models import model_to_dict
 
 import json, time, os, pytz
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from bs4 import BeautifulSoup
 from datetime import datetime
 
@@ -36,7 +38,12 @@ def scrape():
     # This is being used as a headless browser, since the schedule html is built by a JS Function
     # Just performing a get will return the page source, but does not contain the schedule html.
     # using a headless browser executes that JS and allows us to retrieve the final rendered html.
-    driver = webdriver.PhantomJS() # TODO: phontomJS is deprecated, replace with headless
+    # driver = webdriver.PhantomJS() # TODO: phontomJS is deprecated, replace with headless
+    options = FirefoxOptions()
+    options.add_argument('--headless')
+    binary = FirefoxBinary('/usr/bin/firefox')
+    driver = webdriver.Firefox(firefox_binary=binary, firefox_options=options)
+
     url = 'https://helpdesk.uvic.ca/tools/index.php?next_page=schedule/viewAll.php'
     driver.get(url)
     time.sleep(5)
@@ -159,6 +166,7 @@ def findDifferences(past_shifts, current_shifts):
 # overwrite past data with current data, then refresh current data, then compare
 @task(name='scrape_and_notify')
 def scrapeAndNotify():
+    print("scrape and notify")
     # start with a clean slate in the past database
     for item in PastShift.objects.all():
         item.delete()
@@ -215,3 +223,31 @@ def scrapeAndNotify():
     return
 
 '''ICAL GENERATION'''
+@task(name='ical_generation')
+def generateCalendar(request):
+    print("ical generation")
+    tz = pytz.timezone(os.environ['TZ'])
+
+    for consultant in Consultant.objects.all():
+
+        cal = Calendar()
+        # required to be compliant
+        cal.add('prodid', '-//My calendar product//mxm.dk//')
+        cal.add('version', '2.0')
+
+        shifts = Shift.objects.filter(consultant=consultant)
+        for shift in shifts:
+            event = Event()
+            event.add('summary', str(shift.location))
+            dtstart = datetime(shift.year,shift.month,shift.day,shift.start_hour,shift.start_min,0,tzinfo=tz)
+            event.add('dtstart', dtstart)
+            event.add('dtend', datetime(shift.year,shift.month,shift.day,shift.end_hour,shift.end_min,0,tzinfo=tz))
+            event.add('dtstamp', datetime(shift.year,shift.month,shift.day,0,0,0,tzinfo=tz))
+            event['uid'] = dtstart.isoformat() + shift.location + shift.consultant.netlink
+            cal.add_component(event)
+
+        f = open('notifier/{}.ics'.format(consultant.netlink), 'wb')
+        f.write(cal.to_ical())
+        f.close()
+
+    return HttpResponse("hello")

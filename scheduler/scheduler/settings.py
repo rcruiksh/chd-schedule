@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from celery.schedules import crontab
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -129,10 +130,13 @@ CELERY_TIMEZONE = 'America/Vancouver'
 # notifier.conf.enable_utc = False # so celery doesn't take utc by default
 # We're going to have our tasks rolling soon, so that will be handy
 CELERY_BEAT_SCHEDULE = {
- 'scrape_and_notify_every_5_mins': {
-       'task': 'scrape_and_notify',
-        # There are 4 ways we can handle time, read further
-       'schedule': 300.0,
+    'scrape_and_notify_every_hour_on_the_hour': {
+        'task': 'scrape_and_notify',
+        'schedule': crontab(minute=0, hour='*/1'),
+    },
+    'ical_generation_every_hour_on_the_half_hour': {
+        'task': 'ical_generation',
+        'schedule': crontab(minute=30, hour='*/1'),
     },
 }
 CELERY_ALWAYS_EAGER = True

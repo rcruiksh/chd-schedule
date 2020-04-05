@@ -10,5 +10,6 @@ urlpatterns = [
     path('clear', views.clearDB, name='clear'),
     path('query', views.queryDB, name='query'),
     # path('compare', views.compare, name='compare'),
-    path('cal', views.generateCalendar, name='cal'),
+    # path('cal', views.generateCalendar, name='cal'),
+    path('schedule/<str:netlink>', views.download, name='download'),
 ]
