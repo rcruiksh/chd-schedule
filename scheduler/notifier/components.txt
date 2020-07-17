@@ -1,0 +1,24 @@
+phantomjs
+celery -- need to use the scheduler and a worker my god the documentation is vague and bad
+icalendar
+selenium
+beautifulsoup
+django
+redis (start w/ redis-server) -> look into running this as a service
+Docker!! Will make deployment sooo much easier
+https://medium.com/@ksarthak4ever/django-handling-periodic-tasks-with-celery-daaa2a146f14
+
+# TODO: fix var names
+DONE (probably) # TODO: API for adding/removing consultants. Verify by email?
+DONE (for now) # TODO: superuser and admin app setup
+# TODO: test scripts
+# TODO: general error handling. Don't email people if something breaks
+semi-done # TODO: testing with actual changed schedule - do emails get sent?
+# TODO: dockerize it?
+# TODO: documentation
+DONE # TODO: if a consultant hasn't yet signed up/doesn't exist in db, what do we do?
+DONE # TODO: figure out how to deal with consultants in the admin
+ - use default instead of current, delete current.
+ - on save, duplicate consultant data in past db
+ - maybe only use default, and create a model for past shifts to reduce duplication
+ # TODO: ical hosting

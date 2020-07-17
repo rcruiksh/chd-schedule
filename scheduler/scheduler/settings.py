@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from celery.schedules import crontab
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'notifier.apps.NotifierConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,7 +78,7 @@ WSGI_APPLICATION = 'scheduler.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'current',
     }
 }
 
@@ -105,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Vancouver'
 
 USE_I18N = True
 
@@ -118,3 +120,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Celery stuff
+# from celery.schedules import crontab
+CELERY_BROKER_URL = 'redis://localhost:6379'
+# If time zones are active (USE_TZ = True) define your local
+CELERY_TIMEZONE = 'America/Vancouver'
+# notifier.conf.enable_utc = False # so celery doesn't take utc by default
+# We're going to have our tasks rolling soon, so that will be handy
+CELERY_BEAT_SCHEDULE = {
+    'scrape_and_notify_every_hour_on_the_hour': {
+        'task': 'scrape_and_notify',
+        'schedule': crontab(minute=0, hour='*/1'),
+    },
+    'ical_generation_every_hour_on_the_half_hour': {
+        'task': 'ical_generation',
+        'schedule': crontab(minute=30, hour='*/1'),
+    },
+}
+CELERY_ALWAYS_EAGER = True
